@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Made by t7nr</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+	.floating-ten {
+	    position: absolute;
+	    font-size: 40px; /* Size of the character */
+	    color: rgba(255, 255, 255, 0.5); /* Semi-transparent white */
+    	    pointer-events: none; /* So it doesn't interfere with clicks */
+	    z-index: 1; /* Ensures it floats above other elements */
+	    animation: rotate 25s linear infinite;
+	}
+
+	@keyframes rotate {
+	    from { transform: rotate(0deg); }
+	    to { transform: rotate(360deg); }
+	}
+        body { font-family: Oxygen, sans-serif; background: linear-gradient(to bottom, #030403, #322487); color: white; margin: 0; padding: 20px; text-align: center; }
+        .container { max-width: 600px; margin: 0 auto; }
+        .avatar { width: 100px; height: 100px; border-radius: 50%; margin: 20px auto; border: 3px solid white; }
+        h1 { font-size: 2em; margin-bottom: 10px; }
+        .bio { font-size: 1.2em; margin-bottom: 30px; }
+        .link-list { list-style: none; padding: 0; }
+        .link-item { margin: 10px 0; }
+        .link-button { 
+    		display: block; 
+    		background: rgba(255, 255, 255, 0.1); /* Semi-transparent white for glass effect */
+    		color: white; /* White text for contrast */
+    		padding: 15px; 
+    		text-decoration: none; 
+    		border-radius: 10px; /* Rounded corners like iOS */
+    		font-weight: bold; 
+    		transition: all 0.3s ease; /* Smooth hover */
+    		border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
+    		backdrop-filter: blur(10px); /* Frosted glass blur */
+    		-webkit-backdrop-filter: blur(10px); /* Safari support */
+    		box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+	}
+	.link-button:hover { 
+    		background: rgba(255, 255, 255, 0.2); /* Slightly more opaque on hover */
+    		transform: translateY(-2px); /* Lift effect */
+    		box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
+	}
+        .link-description { font-size: 0.9em; color: #ccc; margin-top: 5px; }
+        footer { margin-top: 40px; font-size: 0.8em; color: #ccc; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="https://i.pinimg.com/736x/8d/22/82/8d2282296990e64daf57a62cff0afc53.jpg" alt="Your Avatar" class="avatar"> <!-- Replace with your image -->
+        <h1>renvx</h1>
+        <p class="bio">keep your info safe from the gov.</p>
+        
+        <ul class="link-list" id="link-list"></ul>
+        
+        <footer>
+            <p>Free the internet from mass surveillance and censorship..</p>
+        </footer>
+    </div>
+    
+    <script>
+    	const numTens = 35; // Number of floating elements
+    	for (let i = 0; i < numTens; i++) {
+        	const ten = document.createElement('div');
+        	ten.className = 'floating-ten';
+        	ten.textContent = '十';
+        	ten.style.left = Math.random() * (window.innerWidth - 50) + 'px'; // Random start X
+        	ten.style.top = Math.random() * (window.innerHeight - 50) + 'px'; // Random start Y
+        	document.body.appendChild(ten);
+    
+        	let posX = parseFloat(ten.style.left);
+        	let posY = parseFloat(ten.style.top);
+        	let dirX = (Math.random() - 0.5) * 1.5; // Slower random direction
+        	let dirY = (Math.random() - 0.5) * 1.5;
+    
+        	function moveTen() {
+            	posX += dirX;
+            	posY += dirY;
+        
+            	// Bounce off edges
+            	if (posX <= 0 || posX >= window.innerWidth - 50) dirX *= -1;
+            	if (posY <= 0 || posY >= window.innerHeight - 50) dirY *= -1;
+        
+            	ten.style.left = posX + 'px';
+            	ten.style.top = posY + 'px';
+        
+            	requestAnimationFrame(moveTen);
+        	}
+        	moveTen();
+    	}
+        const links = [
+            {
+                title: "My roblox",
+                url: "https://www.roblox.com/users/3495016524/profile",
+                description: "Don't know what your gonna do with this info."
+            },
+            {
+                title: "Veracrypt",
+                url: "https://veracrypt.io/en/Downloads.html", // Replace with your blog
+                description: "Encrypt. Powerful."
+            },
+            {
+                title: "Tails os",
+                url: "https://tails.net/",
+                description: "associated with TOR."
+            },
+            {
+                title: "Coreboot",
+                url: "https://www.coreboot.org/", // Replace with your IG
+                description: "secure."
+            },
+            {
+                title: "pfsense",
+                url: "https://www.pfsense.org/", // Replace with your channel
+                description: "Opensource security."
+            },
+            {
+                title: "KeePassXC",
+                url: "https://keepassxc.org/",
+                description: "KeePassXC uses a local encrypted database."
+            }
+        ];
+        
+        const linkList = document.getElementById('link-list');
+        links.forEach(link => {
+            const li = document.createElement('li');
+            li.className = 'link-item';
+            li.innerHTML = `
+                <a href="${link.url}" target="_blank" class="link-button">${link.title}</a>
+                <p class="link-description">${link.description}</p>
+            `;
+            linkList.appendChild(li);
+        });
+    </script>
+</body>
+</html>
